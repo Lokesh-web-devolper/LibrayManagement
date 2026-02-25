@@ -3,8 +3,8 @@
     {
       "id": "s1",
       "name": "Alice Student",
-      "email": "alice@university.edu",
-      "password": "student123",
+      "email": "harsha@kluniversity.in",
+      "password": "harsha123",
       "role": "student",
       "avatar": "AS",
       "semester": "4",
@@ -25,9 +25,9 @@
     {
       "id": "a1",
       "name": "Admin User",
-      "email": "admin@eduvault.com",
+      "email": "lokesh@kluniversity.in",
       "username": "admin",
-      "password": "admin123",
+      "password": "lokesh",
       "role": "admin",
       "avatar": "AD",
       "joinDate": "2024-01-01"
@@ -40,7 +40,7 @@
       "subject": "Computer Science",
       "semester": "3",
       "fileType": "PDF",
-      "downloads": 1244,
+      "downloads": 1245,
       "uploadDate": "2025-12-15",
       "uploader": "Dr. Sarah Johnson",
       "category": "Lecture Notes",
