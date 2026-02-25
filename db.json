@@ -1,0 +1,233 @@
+{
+  "students": [
+    {
+      "id": "s1",
+      "name": "Alice Student",
+      "email": "alice@university.edu",
+      "password": "student123",
+      "role": "student",
+      "avatar": "AS",
+      "semester": "4",
+      "joinDate": "2024-09-01"
+    },
+    {
+      "id": "s2",
+      "name": "Bob Student",
+      "email": "bob@university.edu",
+      "password": "student123",
+      "role": "student",
+      "avatar": "BS",
+      "semester": "3",
+      "joinDate": "2024-09-01"
+    }
+  ],
+  "admins": [
+    {
+      "id": "a1",
+      "name": "Admin User",
+      "email": "admin@eduvault.com",
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin",
+      "avatar": "AD",
+      "joinDate": "2024-01-01"
+    }
+  ],
+  "resources": [
+    {
+      "id": "1",
+      "fileName": "Introduction to Data Structures and Algorithms",
+      "subject": "Computer Science",
+      "semester": "3",
+      "fileType": "PDF",
+      "downloads": 1244,
+      "uploadDate": "2025-12-15",
+      "uploader": "Dr. Sarah Johnson",
+      "category": "Lecture Notes",
+      "tags": [
+        "DSA",
+        "Theory",
+        "Important"
+      ],
+      "status": "approved",
+      "description": "Comprehensive introduction to fundamental data structures including arrays, linked lists, stacks, queues, trees, and graphs.",
+      "size": "2.4 MB",
+      "pages": 145,
+      "language": "English"
+    },
+    {
+      "id": "2",
+      "fileName": "Database Management Systems - Complete Notes",
+      "subject": "Computer Science",
+      "semester": "4",
+      "fileType": "PDF",
+      "downloads": 2156,
+      "uploadDate": "2025-12-10",
+      "uploader": "Prof. Michael Chen",
+      "category": "Study Material",
+      "tags": [
+        "DBMS",
+        "SQL",
+        "Complete"
+      ],
+      "status": "approved",
+      "description": "Complete notes on relational databases, SQL, normalization and transactions.",
+      "size": "3.1 MB",
+      "pages": 210,
+      "language": "English"
+    },
+    {
+      "id": "3",
+      "fileName": "Object Oriented Programming Presentation",
+      "subject": "Computer Science",
+      "semester": "2",
+      "fileType": "PPT",
+      "downloads": 987,
+      "uploadDate": "2025-12-20",
+      "uploader": "Dr. Emily Rodriguez",
+      "category": "Presentations",
+      "tags": [
+        "OOP",
+        "Java",
+        "C++"
+      ],
+      "status": "approved",
+      "description": "Interactive presentation covering OOP concepts: classes, inheritance, polymorphism.",
+      "size": "5.2 MB",
+      "pages": 80,
+      "language": "English"
+    },
+    {
+      "id": "4",
+      "fileName": "Linear Algebra Problem Set Solutions",
+      "subject": "Mathematics",
+      "semester": "1",
+      "fileType": "DOCX",
+      "downloads": 1521,
+      "uploadDate": "2025-12-18",
+      "uploader": "Dr. James Wilson",
+      "category": "Assignments",
+      "tags": [
+        "Linear Algebra",
+        "Solutions"
+      ],
+      "status": "approved",
+      "description": "Detailed solutions to all linear algebra problem sets.",
+      "size": "1.8 MB",
+      "pages": 95,
+      "language": "English"
+    },
+    {
+      "id": "5",
+      "fileName": "Engineering Mechanics - Statics & Dynamics",
+      "subject": "Mechanical Engineering",
+      "semester": "2",
+      "fileType": "PDF",
+      "downloads": 845,
+      "uploadDate": "2025-12-12",
+      "uploader": "Prof. Robert Taylor",
+      "category": "Textbooks",
+      "tags": [
+        "Mechanics",
+        "Engineering"
+      ],
+      "status": "approved",
+      "description": "Comprehensive textbook covering statics and dynamics.",
+      "size": "8.7 MB",
+      "pages": 320,
+      "language": "English"
+    },
+    {
+      "id": "6",
+      "fileName": "Web Development Complete Guide",
+      "subject": "Computer Science",
+      "semester": "5",
+      "fileType": "PDF",
+      "downloads": 2341,
+      "uploadDate": "2025-12-22",
+      "uploader": "Dr. Lisa Anderson",
+      "category": "Study Material",
+      "tags": [
+        "Web Dev",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "status": "approved",
+      "description": "A thorough guide to modern web development.",
+      "size": "4.5 MB",
+      "pages": 280,
+      "language": "English"
+    },
+    {
+      "id": "7",
+      "fileName": "Introduction to Machine Learning",
+      "subject": "Computer Science",
+      "semester": "6",
+      "fileType": "PDF",
+      "downloads": 0,
+      "uploadDate": "2026-01-08",
+      "uploader": "Dr. Sarah Johnson",
+      "category": "Lecture Notes",
+      "tags": [
+        "ML",
+        "AI",
+        "Python"
+      ],
+      "status": "approved",
+      "description": "Introductory material on machine learning algorithms.",
+      "size": "3.8 MB",
+      "pages": 190,
+      "language": "English"
+    },
+    {
+      "id": "8",
+      "fileName": "Quantum Mechanics Problem Set",
+      "subject": "Physics",
+      "semester": "3",
+      "fileType": "DOCX",
+      "downloads": 0,
+      "uploadDate": "2026-01-06",
+      "uploader": "Prof. Robert Taylor",
+      "category": "Assignments",
+      "tags": [
+        "Quantum",
+        "Physics"
+      ],
+      "status": "rejected",
+      "description": "Problem sets on quantum mechanics.",
+      "size": "1.2 MB",
+      "pages": 45,
+      "language": "English"
+    },
+    {
+      "id": "9",
+      "fileName": "Control Systems Theory",
+      "subject": "Electrical Engineering",
+      "semester": "5",
+      "fileType": "PDF",
+      "downloads": 0,
+      "uploadDate": "2026-01-05",
+      "uploader": "Prof. David Martinez",
+      "category": "Lecture Notes",
+      "tags": [
+        "Control Systems",
+        "EE"
+      ],
+      "status": "rejected",
+      "description": "Notes on control systems.",
+      "size": "2.9 MB",
+      "pages": 160,
+      "language": "English"
+    }
+  ],
+  "stats": [
+    {
+      "id": "1",
+      "totalResources": 9,
+      "totalUsers": 2,
+      "totalDownloads": 51234,
+      "pendingApprovals": 2
+    }
+  ]
+}
