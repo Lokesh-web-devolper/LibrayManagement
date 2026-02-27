@@ -1,13 +1,82 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './LandingPage.css';
+
+const BASE_URL = 'http://localhost:3001';
+
+function useCountUp(target, duration = 1800) {
+    const [count, setCount] = useState(0);
+    const raf = useRef(null);
+
+    useEffect(() => {
+        if (target == null) return;
+        const start = performance.now();
+        const step = (now) => {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            // ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * target));
+            if (progress < 1) raf.current = requestAnimationFrame(step);
+        };
+        raf.current = requestAnimationFrame(step);
+        return () => cancelAnimationFrame(raf.current);
+    }, [target, duration]);
+
+    return count;
+}
+
+/* ── Stat card with animated count ── */
+function StatCard({ label, target, suffix = '', gradClass }) {
+    const count = useCountUp(target);
+    return (
+        <div className="lp-stat-card">
+            <div className={`lp-stat-num ${gradClass}`}>
+                {count.toLocaleString()}{suffix}
+            </div>
+            <div className="lp-stat-label">{label}</div>
+        </div>
+    );
+}
 
 export default function LandingPage() {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
 
+    // live counts from db.json
+    const [resourceCount, setResourceCount] = useState(null);
+    const [activeUserCount, setActiveUserCount] = useState(null);
+    const [deptCount, setDeptCount] = useState(null);
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const [resRes, studRes, deptRes] = await Promise.all([
+                    axios.get(`${BASE_URL}/resources`),
+                    axios.get(`${BASE_URL}/students`),
+                    axios.get(`${BASE_URL}/departments`),
+                ]);
+                // count only approved resources
+                const approved = (resRes.data || []).filter(r => r.status === 'approved');
+                setResourceCount(approved.length);
+                // count active students
+                const active = (studRes.data || []).filter(u => u.isActive !== false);
+                setActiveUserCount(active.length);
+                setDeptCount((deptRes.data || []).length);
+            } catch (err) {
+                console.error('Stats fetch error:', err);
+                // keep null so we show a loading/unavailable state
+                setResourceCount(0);
+                setActiveUserCount(0);
+                setDeptCount(0);
+            }
+        };
+        fetchStats();
+    }, []);
+
     return (
-        <div className="lp-root">
+        <div className="lp-root lp-fade-in">
             {/* Background blobs */}
             <div className="lp-bg">
                 <div className="lp-blob lp-blob-1" />
@@ -36,78 +105,56 @@ export default function LandingPage() {
                 </div>
             </header>
 
-            {/* Hero */}
+            {/* Hero — fully centered */}
             <section className="lp-hero">
                 <div className="lp-hero-inner">
-                    {/* Left */}
-                    <div className="lp-hero-left">
-                        <div className="lp-badge">
-                            <span className="lp-badge-icon">📖</span>
-                            Academic Resource Management
-                        </div>
-
-                        <h1 className="lp-h1">
-                            Your Smart Digital{' '}
-                            <span className="lp-gradient-text">Academic Library</span>
-                        </h1>
-
-                        <p className="lp-hero-desc">
-                            Centralized access to quality educational resources. Search, download,
-                            and manage study materials effortlessly—all in one place.
-                        </p>
-
-                        <div className="lp-hero-cta">
-                            {/* "Get Started" → Student Login */}
-                            <button className="lp-btn-primary" onClick={() => navigate('/student-login')}>
-                                Get Started <span>→</span>
-                            </button>
-                            {/* "Admin Dashboard" → Admin Login */}
-                            <button className="lp-btn-secondary" onClick={() => navigate('/admin-login')}>
-                                Admin Dashboard
-                            </button>
-                        </div>
-
-                        {/* Stats */}
-                        <div className="lp-stats">
-                            <div className="lp-stat-card">
-                                <div className="lp-stat-num lp-grad-violet">10,000+</div>
-                                <div className="lp-stat-label">Resources</div>
-                            </div>
-                            <div className="lp-stat-card">
-                                <div className="lp-stat-num lp-grad-indigo">2,500+</div>
-                                <div className="lp-stat-label">Active Users</div>
-                            </div>
-                            <div className="lp-stat-card">
-                                <div className="lp-stat-num lp-grad-purple">50+</div>
-                                <div className="lp-stat-label">Departments</div>
-                            </div>
-                        </div>
+                    <div className="lp-badge lp-slide-up" style={{ animationDelay: '0.1s' }}>
+                        <span className="lp-badge-icon">📖</span>
+                        Academic Resource Management
                     </div>
 
-                    {/* Right */}
-                    <div className="lp-hero-right">
-                        <div className="lp-img-wrap">
-                            <img
-                                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80"
-                                alt="Students studying"
-                                className="lp-hero-img"
+                    <h1 className="lp-h1 lp-slide-up" style={{ animationDelay: '0.2s' }}>
+                        Your Smart Digital{' '}
+                        <span className="lp-gradient-text">Academic Library</span>
+                    </h1>
+
+                    <p className="lp-hero-desc lp-slide-up" style={{ animationDelay: '0.3s' }}>
+                        Centralized access to quality educational resources. Search, download,
+                        and manage study materials effortlessly—all in one place.
+                    </p>
+
+                    <div className="lp-hero-cta lp-slide-up" style={{ animationDelay: '0.4s' }}>
+                        <button className="lp-btn-primary" onClick={() => navigate('/student-login')}>
+                            Get Started <span>→</span>
+                        </button>
+                        <button className="lp-btn-secondary" onClick={() => navigate('/admin-login')}>
+                            Admin Dashboard
+                        </button>
+                    </div>
+
+                    {/* Dynamic Stats — only render once all counts are loaded */}
+                    {resourceCount != null && activeUserCount != null && deptCount != null && (
+                        <div className="lp-stats lp-slide-up" style={{ animationDelay: '0.55s' }}>
+                            <StatCard
+                                label="Resources"
+                                target={resourceCount}
+                                suffix=""
+                                gradClass="lp-grad-violet"
                             />
-                            <div className="lp-img-overlay" />
+                            <StatCard
+                                label="Active Users"
+                                target={activeUserCount}
+                                suffix=""
+                                gradClass="lp-grad-indigo"
+                            />
+                            <StatCard
+                                label="Departments"
+                                target={deptCount}
+                                suffix=""
+                                gradClass="lp-grad-purple"
+                            />
                         </div>
-
-                        <div className="lp-float lp-float-tl lp-float-anim-1">
-                            <div className="lp-float-icon" style={{ background: 'linear-gradient(135deg,#7c3aed,#4f46e5)' }}>🔍</div>
-                            <div><div className="lp-float-title">Search Books</div><div className="lp-float-sub">Find anything fast</div></div>
-                        </div>
-                        <div className="lp-float lp-float-tr lp-float-anim-2">
-                            <div className="lp-float-icon" style={{ background: 'linear-gradient(135deg,#4f46e5,#7c3aed)' }}>⬇️</div>
-                            <div><div className="lp-float-title">Download Papers</div><div className="lp-float-sub">Instant access</div></div>
-                        </div>
-                        <div className="lp-float lp-float-bl lp-float-anim-3">
-                            <div className="lp-float-icon" style={{ background: 'linear-gradient(135deg,#9333ea,#7c3aed)' }}>📊</div>
-                            <div><div className="lp-float-title">Track Analytics</div><div className="lp-float-sub">Monitor progress</div></div>
-                        </div>
-                    </div>
+                    )}
                 </div>
             </section>
 

@@ -39,7 +39,14 @@ export default function StudentDashboard() {
         setResources(prev =>
             prev.map(r => r.id === resource.id ? { ...r, downloads: r.downloads + 1 } : r)
         );
-        alert(`Downloading: ${resource.fileName}`);
+        // Trigger a real browser download
+        const link = document.createElement('a');
+        link.href = resource.fileUrl || `https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf`;
+        link.download = resource.fileName + (resource.fileType === 'PDF' ? '.pdf' : resource.fileType === 'PPT' ? '.pptx' : '.docx');
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
 
     const handleViewResource = (id) => {
@@ -73,7 +80,6 @@ export default function StudentDashboard() {
                     {[
                         { key: 'dashboard', icon: '🏠', label: 'Dashboard' },
                         { key: 'all', icon: '📋', label: 'All Resources' },
-                        { key: 'downloads', icon: '⬇️', label: 'My Downloads' },
                     ].map(item => (
                         <button key={item.key}
                             className={`sd-nav-btn ${activeTab === item.key ? 'active' : ''}`}
@@ -108,7 +114,7 @@ export default function StudentDashboard() {
                 <div className="sd-header">
                     <div>
                         <h1 className="sd-title">
-                            {activeTab === 'dashboard' ? 'Dashboard' : activeTab === 'downloads' ? 'My Downloads' : 'All Resources'}
+                            {activeTab === 'dashboard' ? 'Dashboard' : 'All Resources'}
                         </h1>
                         <p className="sd-subtitle">Welcome back, {user?.name || 'Student'} 👋</p>
                     </div>

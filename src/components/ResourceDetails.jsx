@@ -40,7 +40,14 @@ export default function ResourceDetails() {
         if (!resource) return;
         await resourcesAPI.incrementDownload(resource.id, resource.downloads);
         setResource(r => ({ ...r, downloads: r.downloads + 1 }));
-        alert(`Downloading: ${resource.fileName}`);
+        // Trigger a real browser download
+        const link = document.createElement('a');
+        link.href = resource.fileUrl || `https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf`;
+        link.download = resource.fileName + (resource.fileType === 'PDF' ? '.pdf' : resource.fileType === 'PPT' ? '.pptx' : '.docx');
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
 
     const handleBack = () => {

@@ -2,23 +2,67 @@
   "students": [
     {
       "id": "s1",
-      "name": "Alice Student",
+      "name": "HARSHA",
       "email": "harsha@kluniversity.in",
       "password": "harsha123",
       "role": "student",
       "avatar": "AS",
       "semester": "4",
-      "joinDate": "2024-09-01"
+      "joinDate": "2024-09-01",
+      "isActive": true
     },
     {
       "id": "s2",
-      "name": "Bob Student",
-      "email": "bob@university.edu",
-      "password": "student123",
+      "name": "PARDHU",
+      "email": "pardhu@kluniversity.in",
+      "password": "pardhu",
       "role": "student",
       "avatar": "BS",
       "semester": "3",
-      "joinDate": "2024-09-01"
+      "joinDate": "2024-09-01",
+      "isActive": true
+    }
+  ],
+  "departments": [
+    {
+      "id": "d1",
+      "name": "Computer Science"
+    },
+    {
+      "id": "d2",
+      "name": "Mathematics"
+    },
+    {
+      "id": "d3",
+      "name": "Physics"
+    },
+    {
+      "id": "d4",
+      "name": "Electrical Engineering"
+    },
+    {
+      "id": "d5",
+      "name": "Mechanical Engineering"
+    },
+    {
+      "id": "d6",
+      "name": "Civil Engineering"
+    },
+    {
+      "id": "d7",
+      "name": "Chemistry"
+    },
+    {
+      "id": "d8",
+      "name": "Electronics & Communication"
+    },
+    {
+      "id": "d9",
+      "name": "Information Technology"
+    },
+    {
+      "id": "d10",
+      "name": "Biotechnology"
     }
   ],
   "admins": [
@@ -34,27 +78,6 @@
     }
   ],
   "resources": [
-    {
-      "id": "1",
-      "fileName": "Introduction to Data Structures and Algorithms",
-      "subject": "Computer Science",
-      "semester": "3",
-      "fileType": "PDF",
-      "downloads": 1245,
-      "uploadDate": "2025-12-15",
-      "uploader": "Dr. Sarah Johnson",
-      "category": "Lecture Notes",
-      "tags": [
-        "DSA",
-        "Theory",
-        "Important"
-      ],
-      "status": "approved",
-      "description": "Comprehensive introduction to fundamental data structures including arrays, linked lists, stacks, queues, trees, and graphs.",
-      "size": "2.4 MB",
-      "pages": 145,
-      "language": "English"
-    },
     {
       "id": "2",
       "fileName": "Database Management Systems - Complete Notes",
@@ -160,27 +183,6 @@
       "language": "English"
     },
     {
-      "id": "7",
-      "fileName": "Introduction to Machine Learning",
-      "subject": "Computer Science",
-      "semester": "6",
-      "fileType": "PDF",
-      "downloads": 0,
-      "uploadDate": "2026-01-08",
-      "uploader": "Dr. Sarah Johnson",
-      "category": "Lecture Notes",
-      "tags": [
-        "ML",
-        "AI",
-        "Python"
-      ],
-      "status": "approved",
-      "description": "Introductory material on machine learning algorithms.",
-      "size": "3.8 MB",
-      "pages": 190,
-      "language": "English"
-    },
-    {
       "id": "8",
       "fileName": "Quantum Mechanics Problem Set",
       "subject": "Physics",
@@ -198,26 +200,6 @@
       "description": "Problem sets on quantum mechanics.",
       "size": "1.2 MB",
       "pages": 45,
-      "language": "English"
-    },
-    {
-      "id": "9",
-      "fileName": "Control Systems Theory",
-      "subject": "Electrical Engineering",
-      "semester": "5",
-      "fileType": "PDF",
-      "downloads": 0,
-      "uploadDate": "2026-01-05",
-      "uploader": "Prof. David Martinez",
-      "category": "Lecture Notes",
-      "tags": [
-        "Control Systems",
-        "EE"
-      ],
-      "status": "rejected",
-      "description": "Notes on control systems.",
-      "size": "2.9 MB",
-      "pages": 160,
       "language": "English"
     }
   ],

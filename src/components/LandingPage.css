@@ -1,11 +1,5 @@
-/* ============================================================
-   LandingPage.css  –  EduVault Landing Page Styles
-   ============================================================ */
-
-/* ---------- Google Font ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* ---------- CSS Variables ---------- */
 :root {
     --violet: #7c3aed;
     --indigo: #4f46e5;
@@ -45,9 +39,13 @@ body {
 /* ---------- Root wrapper ---------- */
 .lp-root {
     min-height: 100vh;
+    width: 100%;
     background: #fff;
     position: relative;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 /* ============================================================
@@ -251,26 +249,24 @@ body {
    HERO
    ============================================================ */
 .lp-hero {
-    padding: 80px 1.5rem 100px;
+    padding: 80px 2rem 100px;
+    width: 100%;
 }
 
 .lp-hero-inner {
-    max-width: 1200px;
+    max-width: 860px;
+    width: 100%;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+    gap: 0;
 }
 
 @media (max-width: 960px) {
     .lp-hero-inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-    }
-
-    .lp-hero-right {
-        order: -1;
+        max-width: 100%;
     }
 }
 
@@ -324,14 +320,15 @@ body {
     font-size: 1.1rem;
     color: var(--gray-600);
     line-height: 1.7;
-    max-width: 520px;
-    margin-bottom: 2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
 }
 
 /* CTA Buttons */
 .lp-hero-cta {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
     margin-bottom: 2rem;
 }
@@ -382,16 +379,23 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+    width: 100%;
+    max-width: 620px;
+    margin: 1rem auto 0;
 }
 
 .lp-stat-card {
     background: rgba(255, 255, 255, 0.65);
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: var(--radius-lg);
-    padding: 1.25rem;
+    padding: 1.25rem 1rem;
     backdrop-filter: blur(12px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     transition: transform 0.25s, box-shadow 0.25s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .lp-stat-card:hover {
@@ -402,27 +406,35 @@ body {
 .lp-stat-num {
     font-size: 1.75rem;
     font-weight: 800;
+    line-height: 1.2;
+    display: inline-block;
+}
+
+.lp-grad-violet {
+    background: linear-gradient(135deg, var(--violet), var(--indigo));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.lp-grad-violet {
-    background: linear-gradient(135deg, var(--violet), var(--indigo));
-}
-
 .lp-grad-indigo {
     background: linear-gradient(135deg, var(--indigo), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .lp-grad-purple {
     background: linear-gradient(135deg, var(--purple), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .lp-stat-label {
     font-size: 0.82rem;
     color: var(--gray-600);
-    margin-top: 2px;
+    margin-top: 4px;
 }
 
 /* ── Hero Right (image + floaters) ── */
@@ -824,4 +836,122 @@ body {
    ============================================================ */
 html {
     scroll-behavior: smooth;
+}
+
+/* ============================================================
+   ANIMATIONS — fade-in & slide-up
+   ============================================================ */
+
+/* Whole page fades in on mount */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.lp-fade-in {
+    animation: fadeIn 0.6s ease both;
+}
+
+/* Individual hero elements slide up with a delay */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lp-slide-up {
+    opacity: 0;
+    animation: slideUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ============================================================
+   RESPONSIVE  — hero centering on all screens
+   ============================================================ */
+.lp-hero {
+    padding: 80px 1.5rem 100px;
+}
+
+.lp-hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+}
+
+.lp-hero-desc {
+    font-size: 1.1rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.lp-hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.lp-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .lp-hero {
+        padding: 60px 1.25rem 72px;
+    }
+
+    .lp-h1 {
+        font-size: clamp(2rem, 6vw, 3rem);
+    }
+
+    .lp-stats {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 100%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .lp-hero {
+        padding: 48px 1rem 60px;
+    }
+
+    .lp-hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .lp-btn-primary,
+    .lp-btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .lp-stats {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+    }
 }
