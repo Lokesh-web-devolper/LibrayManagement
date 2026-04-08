@@ -1,0 +1,506 @@
+/* ManageUsersTab.css — KL EduVault Admin User Management */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
+
+/* ── Root ── */
+.mu-root {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+}
+
+/* ── Toast ── */
+.mu-toast {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    padding: 1rem 1.5rem;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    animation: muToastIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+    max-width: 380px;
+}
+
+.mu-toast-success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #065f46;
+    background-color: #ecfdf5;
+}
+
+.mu-toast-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #991b1b;
+    background-color: #fef2f2;
+}
+
+@keyframes muToastIn {
+    from { opacity: 0; transform: translateX(60px) scale(0.95); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* ── Header ── */
+.mu-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.mu-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 0.2rem;
+}
+
+.mu-subtitle {
+    font-size: 0.88rem;
+    color: #6b7280;
+}
+
+.mu-add-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 4px 16px rgba(124,58,237,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+}
+
+.mu-add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(124,58,237,0.45);
+}
+
+.mu-cancel-btn {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    box-shadow: 0 4px 16px rgba(107,114,128,0.3);
+}
+
+/* ── Form Card ── */
+.mu-form-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    animation: muFormIn 0.35s ease both;
+}
+
+@keyframes muFormIn {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.mu-form-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.mu-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.mu-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+@media (max-width: 680px) {
+    .mu-form-grid { grid-template-columns: 1fr; }
+}
+
+.mu-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mu-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #374151;
+    letter-spacing: 0.2px;
+}
+
+.mu-input {
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f9fafb;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    color: #111827;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.mu-input:hover {
+    border-color: #d1d5db;
+    background: #fff;
+}
+
+.mu-input:focus {
+    border-color: #7c3aed;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+}
+
+.mu-input-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.1) !important;
+}
+
+.mu-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 2.5rem;
+}
+
+.mu-field-error {
+    font-size: 0.77rem;
+    color: #dc2626;
+    font-weight: 500;
+}
+
+.mu-field-hint {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+/* ── Toggle ── */
+.mu-toggle-row {
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.mu-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #374151;
+    user-select: none;
+}
+
+.mu-toggle {
+    width: 44px;
+    height: 24px;
+    border-radius: 99px;
+    background: #d1d5db;
+    position: relative;
+    transition: background 0.25s;
+    flex-shrink: 0;
+}
+
+.mu-toggle-on {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+}
+
+.mu-toggle-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: left 0.25s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.mu-toggle-on .mu-toggle-dot {
+    left: 23px;
+}
+
+/* ── Form Actions ── */
+.mu-form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+    border-top: 1px solid #f3f4f6;
+}
+
+.mu-cancel-form-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    background: transparent;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.2s;
+}
+
+.mu-cancel-form-btn:hover { background: #f9fafb; }
+
+.mu-submit-btn {
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 4px 16px rgba(124,58,237,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mu-submit-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(124,58,237,0.45);
+}
+
+.mu-submit-btn:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.mu-spinner {
+    display: inline-block;
+    width: 15px; height: 15px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: muSpin 0.7s linear infinite;
+}
+
+@keyframes muSpin { to { transform: rotate(360deg); } }
+
+/* ── Search Row ── */
+.mu-search-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.mu-search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+    max-width: 400px;
+}
+
+.mu-search-icon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    pointer-events: none;
+}
+
+.mu-search-input {
+    width: 100%;
+    padding: 0.7rem 1rem 0.7rem 2.6rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 0.88rem;
+    font-family: 'Inter', sans-serif;
+    color: #111827;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mu-search-input:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+}
+
+.mu-count {
+    font-size: 0.85rem;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+/* ── Table Card ── */
+.mu-table-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+
+.mu-table-wrap {
+    overflow-x: auto;
+}
+
+.mu-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.mu-table thead {
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.mu-table th {
+    padding: 0.85rem 1.25rem;
+    text-align: left;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    white-space: nowrap;
+}
+
+.mu-table tbody tr {
+    border-bottom: 1px solid #f3f4f6;
+    transition: background 0.15s;
+}
+
+.mu-table tbody tr:hover { background: #fafafa; }
+.mu-table tbody tr:last-child { border-bottom: none; }
+
+.mu-table td {
+    padding: 1rem 1.25rem;
+    color: #111827;
+    vertical-align: middle;
+}
+
+/* ── User Cell ── */
+.mu-user-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mu-avatar {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+
+.mu-user-name {
+    font-weight: 600;
+    color: #111827;
+    font-size: 0.88rem;
+}
+
+.mu-user-id {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: 1px;
+}
+
+.mu-email {
+    color: #4b5563;
+    font-size: 0.85rem;
+}
+
+/* ── Status Badges ── */
+.mu-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.mu-status-active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #065f46;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.mu-status-inactive {
+    background: rgba(239, 68, 68, 0.1);
+    color: #991b1b;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* ── Action Buttons ── */
+.mu-actions {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.mu-action-btn {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+
+.mu-action-btn:hover { transform: translateY(-1px); }
+
+.mu-edit-btn:hover { background: #ede9fe; border-color: #c4b5fd; }
+.mu-activate-btn:hover { background: #ecfdf5; border-color: #6ee7b7; }
+.mu-deactivate-btn:hover { background: #fff7ed; border-color: #fdba74; }
+.mu-delete-btn:hover { background: #fef2f2; border-color: #fca5a5; }
+
+/* ── Empty / Loading ── */
+.mu-loading, .mu-empty {
+    padding: 3rem;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+.mu-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.4;
+}

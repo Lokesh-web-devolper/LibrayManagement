@@ -35,45 +35,27 @@ export default function AdminLogin() {
 
     return (
         <div className="al-root">
+            {/* Ambient glow orbs */}
             <div className="al-blob al-blob-1" />
             <div className="al-blob al-blob-2" />
 
             <div className="al-grid">
-                {/* Left panel */}
-                <div className="al-left">
-                    <div className="al-left-card">
-                        <div className="al-left-icon">🛡️</div>
-                        <h2 className="al-left-h2">Admin Access Portal</h2>
-                        <p className="al-left-p">
-                            Manage resources, monitor analytics, and oversee the entire EduVault platform.
-                        </p>
-                        <div className="al-features">
-                            {[
-                                { icon: '📁', title: 'Full Resource Control', sub: 'Upload, edit, and delete resources' },
-                                { icon: '📊', title: 'Analytics Dashboard', sub: 'Track downloads and user activity' },
-                                { icon: '👥', title: 'User Management', sub: 'Monitor and manage user accounts' },
-                            ].map((f, i) => (
-                                <div className="al-feature-row" key={i}>
-                                    <div className="al-feature-icon">{f.icon}</div>
-                                    <div>
-                                        <div className="al-feature-title">{f.title}</div>
-                                        <div className="al-feature-sub">{f.sub}</div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <img
-                            src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80"
-                            alt="Admin workspace"
-                            className="al-left-img"
-                        />
-                    </div>
-                </div>
-
-                {/* Right form */}
+                {/* Single centered glass card — no left panel */}
                 <div className="al-right">
                     <div className="al-form-card">
-                        <div className="al-badge">🛡️ Admin Portal</div>
+
+                        {/* ── KL EduVault Logo ── */}
+                        <div className="al-logo">
+                            <div className="al-logo-icon">📚</div>
+                            <div className="al-logo-text">
+                                <span className="al-logo-primary">KL EduVault</span>
+                                <span className="al-logo-sub">KL University</span>
+                            </div>
+                        </div>
+
+                        <div className="al-divider" />
+
+                        <div className="al-badge" style={{ marginTop: '1.25rem' }}>🛡️ Admin Portal</div>
                         <h1 className="al-h1">Welcome Back</h1>
                         <p className="al-desc">Sign in to your admin account to manage EduVault</p>
 
@@ -118,11 +100,6 @@ export default function AdminLogin() {
                         </form>
 
                         <p className="al-security-note">🔒 Protected with enterprise-grade security</p>
-
-                        {/* Demo credentials hint */}
-                        <div className="al-hint">
-                            <strong>Demo:</strong> admin@eduvault.com / admin123
-                        </div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { resourcesAPI, usersAPI, statsAPI, authHelpers } from '../api/api';
+import ManageUsersTab from './ManageUsersTab';
 import './AdminDashboard.css';
 
 export default function AdminDashboard() {
@@ -71,7 +72,7 @@ export default function AdminDashboard() {
                 <div className="ad-brand">
                     <span className="ad-brand-icon">🛡️</span>
                     <div>
-                        <div className="ad-brand-name">EduVault</div>
+                        <div className="ad-brand-name">KL EduVault</div>
                         <div className="ad-brand-sub">Admin Portal</div>
                     </div>
                 </div>
@@ -82,6 +83,7 @@ export default function AdminDashboard() {
                         { key: 'resources', icon: '📄', label: 'Manage Resources' },
                         { key: 'pending', icon: '⏳', label: `Pending (${pending.length})` },
                         { key: 'users', icon: '👥', label: 'Users' },
+                        { key: 'manage-users', icon: '👤', label: 'Manage Users' },
                         { key: 'analytics', icon: '📊', label: 'Analytics' },
                     ].map(item => (
                         <button key={item.key}
@@ -121,7 +123,7 @@ export default function AdminDashboard() {
                         {/* Header */}
                         <div className="ad-header">
                             <div>
-                                <h1 className="ad-title">Admin Dashboard</h1>
+                                <h1 className="ad-title">KL EduVault Admin</h1>
                                 <p className="ad-subtitle">Welcome back, {user?.name || 'Admin'} 👋</p>
                             </div>
                             <button className="ad-upload-btn" onClick={() => navigate('/upload')}>
@@ -233,12 +235,12 @@ export default function AdminDashboard() {
                         {activeTab === 'users' && (
                             <div className="ad-table-card">
                                 <div className="ad-table-head">
-                                    <h2 className="ad-table-title">👥 User Management</h2>
+                                    <h2 className="ad-table-title">👥 User List</h2>
                                 </div>
                                 <div className="ad-table-wrap">
                                     <table className="ad-table">
                                         <thead>
-                                            <tr><th>Name</th><th>Email</th><th>Semester</th><th>Join Date</th><th>Actions</th></tr>
+                                            <tr><th>Name</th><th>Email</th><th>Semester</th><th>Status</th><th>Actions</th></tr>
                                         </thead>
                                         <tbody>
                                             {users.map(u => (
@@ -246,7 +248,11 @@ export default function AdminDashboard() {
                                                     <td><div className="ad-user-cell"><span className="ad-avatar">{u.avatar}</span>{u.name}</div></td>
                                                     <td>{u.email}</td>
                                                     <td>{u.semester ? `Semester ${u.semester}` : '—'}</td>
-                                                    <td>{new Date(u.joinDate).toLocaleDateString()}</td>
+                                                    <td>
+                                                        <span className={`ad-status ${u.isActive ? 'ad-status-approved' : 'ad-status-rejected'}`}>
+                                                            {u.isActive ? '✅ Active' : '❌ Inactive'}
+                                                        </span>
+                                                    </td>
                                                     <td>
                                                         <button className="ad-action-btn ad-delete" onClick={() => handleDeleteUser(u.id)}>🗑️ Delete</button>
                                                     </td>
@@ -256,6 +262,11 @@ export default function AdminDashboard() {
                                     </table>
                                 </div>
                             </div>
+                        )}
+
+                        {/* Manage Users Tab — full CRUD */}
+                        {activeTab === 'manage-users' && (
+                            <ManageUsersTab />
                         )}
                     </>
                 )}

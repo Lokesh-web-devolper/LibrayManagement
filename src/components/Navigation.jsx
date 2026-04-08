@@ -8,7 +8,7 @@ export default function Navigation({ onSearch, userType = 'guest', onNavigate, u
                 {/* Logo */}
                 <div className="nav-logo" onClick={() => onNavigate && onNavigate('landing')}>
                     <span className="nav-logo-icon">📚</span>
-                    <span className="nav-logo-text">EduVault</span>
+                    <span className="nav-logo-text">KL EduVault</span>
                 </div>
 
                 {/* Search — only for logged-in users */}

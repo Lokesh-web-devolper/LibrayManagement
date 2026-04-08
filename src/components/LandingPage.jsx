@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LandingPage.css';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'http://localhost:8080/api';
 
 function useCountUp(target, duration = 1800) {
     const [count, setCount] = useState(0);

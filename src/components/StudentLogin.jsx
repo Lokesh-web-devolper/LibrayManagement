@@ -27,7 +27,11 @@ export default function StudentLogin() {
                 setError('Invalid Credentials. Please check your email and password.');
             }
         } catch (err) {
-            setError('Connection failed. Make sure json-server is running on port 3001.');
+            if (err.response?.status === 403) {
+                setError('Your account is inactive. Please contact admin.');
+            } else {
+                setError('Connection failed. Make sure the backend server is running.');
+            }
         } finally {
             setIsLoading(false);
         }
@@ -35,45 +39,27 @@ export default function StudentLogin() {
 
     return (
         <div className="sl-root">
+            {/* Ambient glow orbs */}
             <div className="sl-blob sl-blob-1" />
             <div className="sl-blob sl-blob-2" />
 
             <div className="sl-grid">
-                {/* Left panel */}
-                <div className="sl-left">
-                    <div className="sl-left-card">
-                        <div className="sl-left-icon">📚</div>
-                        <h2 className="sl-left-h2">Your Learning Library Awaits</h2>
-                        <p className="sl-left-p">
-                            Access thousands of quality academic resources. Search, download, and study smarter.
-                        </p>
-                        <div className="sl-features">
-                            {[
-                                { icon: '🔍', title: 'Smart Search', sub: 'Find resources instantly with filters' },
-                                { icon: '⬇️', title: 'Easy Downloads', sub: 'Download PDFs, PPTs, and documents' },
-                                { icon: '⭐', title: 'Bookmark Favorites', sub: 'Save resources for quick access' },
-                            ].map((f, i) => (
-                                <div className="sl-feature-row" key={i}>
-                                    <div className="sl-feature-icon">{f.icon}</div>
-                                    <div>
-                                        <div className="sl-feature-title">{f.title}</div>
-                                        <div className="sl-feature-sub">{f.sub}</div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <img
-                            src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=600&q=80"
-                            alt="Library"
-                            className="sl-left-img"
-                        />
-                    </div>
-                </div>
-
-                {/* Right form */}
+                {/* Single centered glass card */}
                 <div className="sl-right">
                     <div className="sl-form-card">
-                        <div className="sl-badge">📖 Student Portal</div>
+
+                        {/* ── KL EduVault Logo ── */}
+                        <div className="sl-logo">
+                            <div className="sl-logo-icon">📚</div>
+                            <div className="sl-logo-text">
+                                <span className="sl-logo-primary">KL EduVault</span>
+                                <span className="sl-logo-sub">KL University</span>
+                            </div>
+                        </div>
+
+                        <div className="sl-divider" />
+
+                        <div className="sl-badge" style={{ marginTop: '1.25rem' }}>📖 Student Portal</div>
                         <h1 className="sl-h1">Welcome Back</h1>
                         <p className="sl-desc">Sign in to access your academic resource library</p>
 
@@ -84,7 +70,7 @@ export default function StudentLogin() {
                                 <label className="sl-label" htmlFor="sl-email">Email Address</label>
                                 <div className="sl-input-wrap">
                                     <span className="sl-input-icon">✉️</span>
-                                    <input id="sl-email" type="email" placeholder="student@university.edu"
+                                    <input id="sl-email" type="email" placeholder="student@kluniversity.in"
                                         className="sl-input" value={email}
                                         onChange={e => setEmail(e.target.value)} required />
                                 </div>
@@ -109,7 +95,7 @@ export default function StudentLogin() {
 
                             <button type="submit" className="sl-submit-btn" disabled={isLoading}>
                                 {isLoading && <span className="sl-spinner" />}
-                                {isLoading ? 'Signing in…' : 'Sign In to EduVault →'}
+                                {isLoading ? 'Signing in…' : 'Sign In to KL EduVault →'}
                             </button>
 
                             <button type="button" className="sl-back-btn" onClick={() => navigate('/')}>
@@ -123,11 +109,6 @@ export default function StudentLogin() {
                                 Go to Admin Login
                             </button>
                         </p>
-
-                        {/* Demo credentials hint */}
-                        <div className="sl-hint">
-                            <strong>Demo:</strong> alice@university.edu / student123
-                        </div>
                     </div>
                 </div>
             </div>

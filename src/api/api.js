@@ -1,23 +1,28 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://localhost:8080/api';
 
 const api = axios.create({
     baseURL: BASE_URL,
     headers: { 'Content-Type': 'application/json' },
 });
+
+// ── AUTH ───────────────────────────────────────────────────
 export const authAPI = {
-    /** Fetch student by email+password from /students */
+    /** Student login via POST /auth/student/login */
     studentLogin: async (email, password) => {
-        const res = await api.get(`/students?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
-        return res.data[0] || null;          // returns user object or null
+        const res = await api.post('/auth/student/login', { email, password });
+        return res.data || null;
     },
 
+    /** Admin login via POST /auth/admin/login */
     adminLogin: async (email, password) => {
-        const res = await api.get(`/admins?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
-        return res.data[0] || null;
+        const res = await api.post('/auth/admin/login', { email, password });
+        return res.data || null;
     },
 };
+
+// ── STUDENTS (read-only for dashboard) ────────────────────
 export const studentsAPI = {
     getAll: () => api.get('/students'),
     getById: (id) => api.get(`/students/${id}`),
@@ -47,6 +52,27 @@ export const resourcesAPI = {
 export const statsAPI = {
     get: () => api.get('/stats/1'),
     update: (data) => api.patch('/stats/1', data),
+};
+
+// ── ADMIN USER MANAGEMENT ──────────────────────────────────
+export const adminUsersAPI = {
+    /** GET /api/admin/users?q=searchTerm */
+    getAll: (search = '') => api.get(`/admin/users${search ? `?q=${encodeURIComponent(search)}` : ''}`),
+
+    /** GET /api/admin/users/:id */
+    getById: (id) => api.get(`/admin/users/${id}`),
+
+    /** POST /api/admin/users */
+    create: (data) => api.post('/admin/users', data),
+
+    /** PUT /api/admin/users/:id */
+    update: (id, data) => api.put(`/admin/users/${id}`, data),
+
+    /** DELETE /api/admin/users/:id */
+    delete: (id) => api.delete(`/admin/users/${id}`),
+
+    /** PATCH /api/admin/users/:id/toggle-status */
+    toggleStatus: (id) => api.patch(`/admin/users/${id}/toggle-status`),
 };
 
 // ── AUTH HELPERS (localStorage) ────────────────────────────

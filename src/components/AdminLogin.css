@@ -1,7 +1,7 @@
-/* AdminLogin.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* AdminLogin.css — KL EduVault Glassmorphism Design 2026 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap');
 
-* {
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -11,185 +11,214 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+/* ── Root: Full-screen background ── */
 .al-root {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
     position: relative;
     overflow: hidden;
-    padding: 2rem;
+    padding: 1.5rem;
+
+    /* KL University campus image */
+    background-image: url('https://www.kluniversity.in/lib/img/slider/slider-02.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-.al-blob {
+/* Dark overlay for better readability */
+.al-root::before {
+    content: '';
     position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.35;
-    pointer-events: none;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(8, 4, 25, 0.60) 0%,
+        rgba(20, 8, 60, 0.55) 50%,
+        rgba(8, 16, 48, 0.60) 100%
+    );
     z-index: 0;
 }
 
+/* Animated glowing orbs behind the card */
+.al-blob {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    animation: floatOrb 8s ease-in-out infinite alternate;
+}
+
 .al-blob-1 {
-    width: 400px;
-    height: 400px;
-    background: #c4b5fd;
-    top: -80px;
-    left: -80px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.35) 0%, transparent 70%);
+    top: -120px;
+    left: -120px;
+    animation-delay: 0s;
 }
 
 .al-blob-2 {
-    width: 400px;
-    height: 400px;
-    background: #a5b4fc;
-    bottom: -80px;
-    right: -80px;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+    bottom: -100px;
+    right: -100px;
+    animation-delay: -4s;
 }
 
+@keyframes floatOrb {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+/* ── Hide the old grid — replaced by single centered card ── */
 .al-grid {
     position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    z-index: 2;
+    display: flex;
     align-items: center;
-    max-width: 1100px;
+    justify-content: center;
     width: 100%;
 }
 
-@media (max-width: 860px) {
-    .al-grid {
-        grid-template-columns: 1fr;
+.al-left {
+    display: none !important;
+}
+
+/* ── Right panel = the glass card ── */
+.al-right {
+    width: 100%;
+    max-width: 480px;
+}
+
+/* ── Glass Card ── */
+.al-form-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 28px;
+    padding: 3rem 2.75rem;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+        0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    animation: cardSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes cardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.96);
     }
-
-    .al-left {
-        display: none;
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
-/* Left */
-.al-left-card {
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 36px;
-    padding: 3rem;
-    box-shadow: 0 20px 60px rgba(124, 58, 237, 0.12);
+/* ── Logo / Branding at top ── */
+.al-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    justify-content: center;
 }
 
-.al-left-icon {
-    font-size: 2.5rem;
-    background: linear-gradient(135deg, #7c3aed, #4f46e5);
-    border-radius: 18px;
-    padding: 12px 16px;
-    display: inline-block;
-    margin-bottom: 1.5rem;
+.al-logo-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.5);
+    flex-shrink: 0;
 }
 
-.al-left-h2 {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #111827;
-    margin-bottom: 1rem;
-}
-
-.al-left-p {
-    color: #4b5563;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-}
-
-.al-features {
+.al-logo-text {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    line-height: 1;
 }
 
-.al-feature-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
+.al-logo-primary {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, #c4b5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
 }
 
-.al-feature-icon {
-    font-size: 1.2rem;
-    background: #ede9fe;
-    border-radius: 10px;
-    padding: 6px 8px;
+.al-logo-sub {
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
 }
 
-.al-feature-title {
-    font-weight: 600;
-    color: #111827;
-    font-size: 0.9rem;
-}
-
-.al-feature-sub {
-    font-size: 0.78rem;
-    color: #6b7280;
-    margin-top: 1px;
-}
-
-.al-left-img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 20px;
-    margin-top: 1rem;
-}
-
-/* Right – form */
-.al-form-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 36px;
-    padding: 3rem;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08);
-}
-
+/* ── Badge ── */
 .al-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: linear-gradient(135deg, rgba(124, 58, 237, .1), rgba(79, 70, 229, .1));
-    border: 1px solid rgba(167, 139, 250, .4);
-    padding: 6px 16px;
+    background: rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(167, 139, 250, 0.35);
+    padding: 5px 14px;
     border-radius: 999px;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    color: #7c3aed;
-    margin-bottom: 1.25rem;
+    color: rgba(196, 181, 253, 0.95);
+    margin-bottom: 1rem;
+    letter-spacing: 0.3px;
 }
 
+/* ── Headings ── */
 .al-h1 {
-    font-size: 2.2rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem;
     font-weight: 800;
-    color: #111827;
-    margin-bottom: 0.4rem;
+    color: #ffffff;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.5px;
 }
 
 .al-desc {
-    color: #6b7280;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-}
-
-.al-error {
-    background: #fee2e2;
-    color: #991b1b;
-    padding: 0.75rem 1rem;
-    border-radius: 12px;
-    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.58);
+    margin-bottom: 1.75rem;
     font-size: 0.88rem;
+    line-height: 1.5;
 }
 
+/* ── Error box ── */
+.al-error {
+    background: rgba(239, 68, 68, 0.18);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #fca5a5;
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    font-size: 0.86rem;
+    backdrop-filter: blur(8px);
+}
+
+/* ── Form ── */
 .al-form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.15rem;
 }
 
 .al-field {
@@ -199,11 +228,13 @@ body {
 }
 
 .al-label {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 600;
-    color: #374151;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.3px;
 }
 
+/* ── Inputs ── */
 .al-input-wrap {
     position: relative;
 }
@@ -214,24 +245,49 @@ body {
     top: 50%;
     transform: translateY(-50%);
     font-size: 1rem;
+    pointer-events: none;
+    opacity: 0.7;
 }
 
 .al-input {
     width: 100%;
     padding: 0.85rem 1rem 0.85rem 2.8rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
     font-size: 0.9rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
     outline: none;
+    backdrop-filter: blur(8px);
+}
+
+.al-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.al-input:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.11);
 }
 
 .al-input:focus {
-    border-color: #7c3aed;
-    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+    border-color: rgba(139, 92, 246, 0.7);
+    background: rgba(255, 255, 255, 0.13);
+    box-shadow:
+        0 0 0 3px rgba(139, 92, 246, 0.25),
+        0 0 20px rgba(139, 92, 246, 0.15);
 }
 
+/* Autofill override */
+.al-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(30, 15, 60, 0.8) inset;
+    -webkit-text-fill-color: #ffffff;
+    caret-color: #ffffff;
+}
+
+/* ── Remember me / Forgot password row ── */
 .al-row-between {
     display: flex;
     align-items: center;
@@ -241,9 +297,17 @@ body {
 .al-check-label {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
-    color: #4b5563;
+    gap: 8px;
+    font-size: 0.83rem;
+    color: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+    user-select: none;
+}
+
+.al-check-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #8b5cf6;
     cursor: pointer;
 }
 
@@ -251,88 +315,179 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 0.85rem;
-    color: #7c3aed;
+    font-size: 0.83rem;
+    color: rgba(196, 181, 253, 0.85);
     font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    transition: color 0.2s;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: transparent;
 }
 
 .al-link:hover {
-    color: #5b21b6;
+    color: #c4b5fd;
+    text-decoration-color: rgba(196, 181, 253, 0.5);
 }
 
+/* ── Submit button ── */
 .al-submit-btn {
     padding: 0.95rem;
     border-radius: 14px;
     border: none;
     cursor: pointer;
-    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 50%, #3b82f6 100%);
+    background-size: 200% 200%;
     color: #fff;
     font-size: 0.95rem;
     font-weight: 700;
-    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.3);
-    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 0.3px;
+    box-shadow:
+        0 6px 24px rgba(139, 92, 246, 0.45),
+        0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s, background-position 0.4s;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.al-submit-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+    opacity: 0;
+    transition: opacity 0.2s;
+    border-radius: inherit;
 }
 
 .al-submit-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(124, 58, 237, 0.4);
+    background-position: right center;
+    box-shadow:
+        0 12px 32px rgba(139, 92, 246, 0.55),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.al-submit-btn:hover:not(:disabled)::after {
+    opacity: 1;
+}
+
+.al-submit-btn:active:not(:disabled) {
+    transform: translateY(0px);
 }
 
 .al-submit-btn:disabled {
-    opacity: 0.7;
+    opacity: 0.65;
     cursor: not-allowed;
 }
 
+/* ── Back button ── */
 .al-back-btn {
     padding: 0.85rem;
     border-radius: 14px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     cursor: pointer;
-    background: transparent;
-    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.06);
+    font-size: 0.88rem;
     font-weight: 500;
-    color: #374151;
-    transition: background 0.2s;
+    font-family: 'Inter', sans-serif;
+    color: rgba(255, 255, 255, 0.7);
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    backdrop-filter: blur(8px);
 }
 
 .al-back-btn:hover {
-    background: #f9fafb;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #ffffff;
 }
 
+/* ── Spinner ── */
 .al-spinner {
     display: inline-block;
     width: 16px;
     height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.25);
     border-top-color: #fff;
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
+    to { transform: rotate(360deg); }
+}
+
+/* ── Security note ── */
+.al-security-note {
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.38);
+    margin-top: 1.25rem;
+}
+
+/* ── Demo hint ── */
+.al-hint {
+    margin-top: 0.9rem;
+    background: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(167, 139, 250, 0.25);
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    color: rgba(196, 181, 253, 0.85);
+    text-align: center;
+    backdrop-filter: blur(6px);
+}
+
+/* ── Divider line (decorative) ── */
+.al-divider {
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.18),
+        transparent
+    );
+    margin: 0.25rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 540px) {
+    .al-root {
+        padding: 1rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+
+    .al-form-card {
+        padding: 2rem 1.5rem;
+        border-radius: 22px;
+    }
+
+    .al-h1 {
+        font-size: 1.7rem;
+    }
+
+    .al-logo-primary {
+        font-size: 1.3rem;
+    }
+
+    .al-right {
+        max-width: 100%;
     }
 }
 
-.al-security-note {
-    text-align: center;
-    font-size: 0.78rem;
-    color: #9ca3af;
-    margin-top: 1.5rem;
-}
+@media (max-width: 380px) {
+    .al-form-card {
+        padding: 1.75rem 1.25rem;
+    }
 
-.al-hint {
-    margin-top: 1rem;
-    background: #f5f3ff;
-    border: 1px solid #ede9fe;
-    border-radius: 10px;
-    padding: 0.65rem 1rem;
-    font-size: 0.82rem;
-    color: #5b21b6;
-    text-align: center;
+    .al-h1 {
+        font-size: 1.5rem;
+    }
 }
